@@ -5,6 +5,9 @@ class CustomProcessor extends DisplayProcessor {
     public displayJasmineStarted(info: SuiteInfo, log: string): string {
         return `${log}`;
     }
+    public suite?: {
+        displayNumber?: boolean
+    }
 }
 
 jasmine.getEnv().clearReporters();
