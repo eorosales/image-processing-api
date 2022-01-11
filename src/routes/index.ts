@@ -1,12 +1,12 @@
-import express from 'express';
-import resize from './api/resize';
+import express from 'express'
+import resize from './api/resize'
 
-const routes = express.Router();
+const routes = express.Router()
 
 routes.get('/', (req, res) => {
-  res.send('Main Route')
+    res.send('Main Route')
 })
 
-routes.use('/resize', resize);
+routes.use('/resize', resize)
 
-export default routes;
+export default routes
