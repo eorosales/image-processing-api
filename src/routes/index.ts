@@ -3,7 +3,7 @@ import resize from './api/resize'
 
 const routes = express.Router()
 
-routes.get('/', (req, res) => {
+routes.get('/', (_req, res) => {
     res.send('Main Route')
 })
 

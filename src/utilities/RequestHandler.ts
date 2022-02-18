@@ -1,27 +1,24 @@
 import path from 'path'
-import sharp from 'sharp'
 
-class RequestHandler {
-    title: unknown
-    width: unknown
-    height: unknown
-    constructor(title: unknown, width: unknown, height: unknown) {
-        this.title = title
-        this.width = width
-        this.height = height
+export class RequestHandler {
+    title: string;
+    width: number;
+    height: number;
+
+    // Initialize properties
+    constructor() {
+        this.title = '';
+        this.width = 0;
+        this.height = 0;
     }
+
+    // Input path to be used in Sharp
     inputPath(title: string) {
-        return path.join(__dirname, '../', 'images', 'input', `${title}.jpg`)
+        return path.join(__dirname, '../', 'images', 'input', `${title}.jpg`);
     }
+
+    // Output path and file output file renaming
     outputPath(title: string, width: number, height: number) {
-        return path.join(
-            __dirname,
-            '../',
-            'images',
-            'output',
-            `${title}_${width}x${height}.jpg`
-        )
+        return path.join(__dirname, '../', 'images', 'output', `${title}_${width}x${height}.jpg`);
     }
 }
-
-export default RequestHandler
