@@ -35,6 +35,7 @@
   "dependencies": {
     "jasmine": "^4.0.1",
     "jasmine-spec-reporter": "^7.0.0",
+    "node-cache": "^5.1.2",
     "sharp": "^0.29.3"
   }
 }
