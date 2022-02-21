@@ -1,10 +1,9 @@
 import express from 'express'
-import sharp from 'sharp'
+import { promises as fs} from 'fs';
 import path from 'path'
-import { promises as fs } from 'fs'
+import sharp from 'sharp'
+
 import { RequestHandler } from '../../utilities/RequestHandler'
-
-
 
 const resize = express.Router();
 
@@ -12,25 +11,31 @@ resize.get('/', async (req: express.Request, res: express.Response) => {
 
 
     try {
-        const myImage = new RequestHandler();    
-        const title = req.query.title as unknown;
-        const width = parseInt(`${req.query.width}`);
-        const height = parseInt(`${req.query.height}`);
-        const outputDir = path.join(__dirname, '../../', 'images', 'output', `${title}_${width}x${height}.jpeg`);
-        myImage.inputPath(`${title}`);
-               
-        sharp(myImage.inputPath(title as string))
-                .resize(width as number, height as number)
-                .toFormat("jpeg", { 
-                    progressive: true, 
-                    quality: 50 
-                })
-                .toBuffer()  
-                .then(data => {
-                    fs.writeFile(outputDir, `${data}`);
-                    res.end(data);
-                })
-    
+        const myImage = new RequestHandler(
+            req.query.title as string, 
+            parseInt(`${req.query.width}`),
+            parseInt(`${req.query.height}`)
+        );    
+
+        // Output consistent naming convention for processed images via Sharp
+        const outputImageName = `${myImage.title}_${myImage.width}x${myImage.height}.jpeg`;
+        // Path to output folder via Sharp's toFile() method
+        const outputPath = path.join(__dirname, '../../', 'public', 'output', outputImageName);
+        
+        // Output resized image
+        await sharp(myImage.inputPath())
+            .resize(myImage.width, myImage.height)
+            .jpeg({
+                quality: 50,
+                progressive: true
+            })
+            .toFile(outputPath)
+
+        res.send(`
+            <h2>Image Processing API</h2>
+            <img src="/output/${outputImageName}" />
+        `)
+
     } catch(err) {
         // Handle ERROR
         res.send(`${err}`);
