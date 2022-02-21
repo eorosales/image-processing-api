@@ -35,24 +35,32 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var supertest_1 = __importDefault(require("supertest"));
-var index_1 = __importDefault(require("../index"));
-var request = (0, supertest_1.default)(index_1.default);
-describe('Test endpoint responses', function () {
-    it('Get the main API endpoint', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var response;
+var RequestHandler_1 = require("../utilities/RequestHandler");
+describe('Test RequestHandler methods', function () {
+    // Instantiate class and populate with test args
+    var myImage = new RequestHandler_1.RequestHandler('Title', 100, 200);
+    // Test inputPath() method
+    it('Return path to the input JPG file', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var newFile;
         return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, request.get('/')];
-                case 1:
-                    response = _a.sent();
-                    expect(response.status).toBe(200);
-                    return [2 /*return*/];
-            }
+            newFile = myImage.inputPath().split('/')[8];
+            expect(newFile).toContain("".concat(myImage.title, ".jpg"));
+            return [2 /*return*/];
         });
     }); });
+    // Test outputImageName() method
+    it('Rename input image files correctly', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var renamedImage;
+        return __generator(this, function (_a) {
+            renamedImage = myImage.outputImageName();
+            expect(renamedImage).toEqual('Title_100x200.jpeg');
+            return [2 /*return*/];
+        });
+    }); });
+    // Test outputPath() method
+    it('Output processed images to the "output" folder', function () {
+        var outputFolder = myImage.outputPath().split('/')[7];
+        expect(outputFolder).toEqual('output');
+    });
 });

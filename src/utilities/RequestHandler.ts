@@ -1,12 +1,10 @@
-import { promises as fs } from 'fs'
 import path from 'path'
-import sharp from 'sharp'
 
 export class RequestHandler {
     // Class properties
     title: string;
-    width?: number;
-    height?: number;
+    width: number;
+    height: number;
 
     constructor(title: string, width: number, height: number) {
         this.title = title;
@@ -29,5 +27,4 @@ export class RequestHandler {
     outputPath():string { 
         return path.join(__dirname, '../', 'public', 'output', this.outputImageName());
     }
-    
 }

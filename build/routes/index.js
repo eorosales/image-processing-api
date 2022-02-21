@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var resize_1 = __importDefault(require("./api/resize"));
 var routes = express_1.default.Router();
-routes.get('/', function (req, res) {
+routes.get('/', function (_req, res) {
     res.send('Main Route');
 });
 routes.use('/resize', resize_1.default);

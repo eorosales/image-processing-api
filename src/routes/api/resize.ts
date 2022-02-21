@@ -1,6 +1,4 @@
 import express from 'express'
-import { promises as fs} from 'fs';
-import path from 'path'
 import sharp from 'sharp'
 
 import { RequestHandler } from '../../utilities/RequestHandler'
@@ -23,12 +21,12 @@ resize.get('/', async (req: express.Request, res: express.Response) => {
 
         // Asynchronously run Sharp to process and output images
         await sharp(inputPath)
-        .resize(myImage.width, myImage.height)
-        .jpeg({
-            quality: 50,
-            progressive: true
-        })
-        .toFile(outputPath);
+            .resize(myImage.width, myImage.height)
+            .jpeg({
+                quality: 50,
+                progressive: true
+            })
+            .toFile(outputPath);
     
         // Display processed image to browser
         res.send(`
@@ -38,7 +36,7 @@ resize.get('/', async (req: express.Request, res: express.Response) => {
         
     } catch(err) {
         // Handle ERROR
-        res.send(`${err}`);
+        res.send(`Not able to serve processed image: ${err}`);
     }
 });
 
