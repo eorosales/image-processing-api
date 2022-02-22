@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
     res.send('Success')
 })
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'))
 
 app.use('/api', routes)
 

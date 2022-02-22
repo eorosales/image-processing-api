@@ -41,7 +41,7 @@ describe('Test RequestHandler methods', function () {
     // Instantiate class and populate with test args
     var myImage = new RequestHandler_1.RequestHandler('Title', 100, 200);
     // Test inputPath() method
-    it('Return path to the input JPG file', function () { return __awaiter(void 0, void 0, void 0, function () {
+    it('Point to correct path for Sharp input JPG file', function () { return __awaiter(void 0, void 0, void 0, function () {
         var newFile;
         return __generator(this, function (_a) {
             newFile = myImage.inputPath().split('/')[8];

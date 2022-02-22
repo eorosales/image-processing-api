@@ -14,7 +14,6 @@ var RequestHandler = /** @class */ (function () {
     // Input path for Sharp
     RequestHandler.prototype.inputPath = function () {
         var inputDir = path_1.default.join(__dirname, '../', 'public', 'input', "".concat(this.title, ".jpg"));
-        // const inputFile = inputDir.split('/')[8];
         return inputDir;
     };
     RequestHandler.prototype.outputImageName = function () {

@@ -1,43 +1,42 @@
 import express from 'express'
 import sharp from 'sharp'
 
-import { RequestHandler } from '../../utilities/RequestHandler'
+import { ResizeHandler } from '../../utilities/RequestHandler'
 
-const resize = express.Router();
+const resize = express.Router()
 
 resize.get('/', async (req: express.Request, res: express.Response) => {
     try {
         // Instantiate RequestHandler with queried args
-        const myImage = new RequestHandler(
-            req.query.title as string, 
+        const myImage = new ResizeHandler(
+            req.query.title as string,
             parseInt(`${req.query.width}`),
             parseInt(`${req.query.height}`)
-        );   
-        
+        )
+
         // Create specifications for input and output for processed images
-        const inputPath = myImage.inputPath(); 
-        const outputPath = myImage.outputPath();
-        const outputImageName = myImage.outputImageName();
+        const inputPath = myImage.inputPath()
+        const outputPath = myImage.outputPath()
+        const outputImageName = myImage.outputImageName()
 
         // Asynchronously run Sharp to process and output images
         await sharp(inputPath)
             .resize(myImage.width, myImage.height)
             .jpeg({
                 quality: 50,
-                progressive: true
+                progressive: true,
             })
-            .toFile(outputPath);
-    
+            .toFile(outputPath)
+
         // Display processed image to browser
         res.send(`
             <h2>Image Processing API</h2>
             <img src="/output/${outputImageName}" />
         `)
-        
-    } catch(err) {
+    } catch (err) {
         // Handle ERROR
-        res.send(`Not able to serve processed image: ${err}`);
+        res.send(`Not able to serve processed image: ${err}`)
     }
-});
+})
 
-export default resize;
+export default resize
