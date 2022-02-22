@@ -30,8 +30,16 @@ resize.get('/', async (req: express.Request, res: express.Response) => {
 
         // Display processed image to browser
         res.send(`
-            <h2>Image Processing API</h2>
-            <img src="/output/${outputImageName}" />
+            <div style="
+                margin: 0;
+                position: absolute;
+                top: 40%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            ">
+                <h2>Image Processing API</h2>
+                <img src="/output/${outputImageName}" />
+            </div>
         `)
     } catch (err) {
         // Handle ERROR
