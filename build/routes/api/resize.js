@@ -41,38 +41,51 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
 var sharp_1 = __importDefault(require("sharp"));
+var node_cache_1 = __importDefault(require("node-cache"));
 var RequestHandler_1 = require("../../utilities/RequestHandler");
 var resize = express_1.default.Router();
+var cache = new node_cache_1.default();
 resize.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var myImage, inputPath, outputPath, outputImageName, err_1;
+    var myImage, inputPath, outputFilePath, outputImageName, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                myImage = new RequestHandler_1.RequestHandler(req.query.title, parseInt("".concat(req.query.width)), parseInt("".concat(req.query.height)));
+                _a.trys.push([0, 4, , 5]);
+                myImage = new RequestHandler_1.ResizeHandler(req.query.title, parseInt("".concat(req.query.width)), parseInt("".concat(req.query.height)));
                 inputPath = myImage.inputPath();
-                outputPath = myImage.outputPath();
+                outputFilePath = myImage.outputPath();
                 outputImageName = myImage.outputImageName();
-                // Asynchronously run Sharp to process and output images
-                return [4 /*yield*/, (0, sharp_1.default)(inputPath)
-                        .resize(myImage.width, myImage.height)
-                        .jpeg({
-                        quality: 50,
-                        progressive: true
-                    })
-                        .toFile(outputPath)];
-            case 1:
+                if (!cache.has('key')) return [3 /*break*/, 1];
+                res.send("\n                <h2>Image Processing API</h2>\n                <img src=\"/output/".concat(cache.get('key'), "\" />\n                <p>Image being served from cache!</p>\n            "));
+                return [3 /*break*/, 3];
+            case 1: 
+            // If key is not present inside cache, process the image
+            // Asynchronously run Sharp to process and output images
+            return [4 /*yield*/, (0, sharp_1.default)(inputPath)
+                    .resize(myImage.width, myImage.height)
+                    .jpeg({
+                    quality: 50,
+                    progressive: true,
+                })
+                    .toFile(outputFilePath)
+                // Set key to serve for future requests
+            ];
+            case 2:
+                // If key is not present inside cache, process the image
                 // Asynchronously run Sharp to process and output images
                 _a.sent();
+                // Set key to serve for future requests
+                cache.set('key', outputImageName);
                 // Display processed image to browser
-                res.send("\n            <h2>Image Processing API</h2>\n            <img src=\"/output/".concat(outputImageName, "\" />\n        "));
-                return [3 /*break*/, 3];
-            case 2:
+                res.send("\n            \n            <h2>Image Processing API</h2>\n            <img src=\"/output/".concat(outputImageName, "\" />\n            <p>Image has been processed and cached!</p>\n            \n        "));
+                _a.label = 3;
+            case 3: return [3 /*break*/, 5];
+            case 4:
                 err_1 = _a.sent();
                 // Handle ERROR
-                res.send("Not able to serve processed image: ".concat(err_1));
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                res.send("There was an issue with your request: ".concat(err_1));
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
         }
     });
 }); });

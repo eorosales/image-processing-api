@@ -39,7 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var RequestHandler_1 = require("../utilities/RequestHandler");
 describe('Test RequestHandler methods', function () {
     // Instantiate class and populate with test args
-    var myImage = new RequestHandler_1.RequestHandler('Title', 100, 200);
+    var myImage = new RequestHandler_1.ResizeHandler('Title', 100, 200);
     // Test inputPath() method
     it('Point to correct path for Sharp input JPG file', function () { return __awaiter(void 0, void 0, void 0, function () {
         var newFile;
