@@ -27,7 +27,7 @@ npm run start
 ### Setting up your input image to be resized
 
 1. Open the 'Image-Processing-API' project directory
-2. Navigate to 'src/public/input' (there should be a file already in there called 'dtsj.jpg')
+2. Navigate to '/public/input' (there should be a file already in there called 'dtsj.jpg')
 3. Drag and drop or copy and paste your image into the directory.
 4. Open your preferred browser application.
 
@@ -44,7 +44,7 @@ localhost:3000/api/resize?title=[YOUR-FILE-NAME]&width=[YOUR-OUTPUT-FILE-WIDTH]&
 ### Finding Your Processed Image
 
 1. Open the 'Image-Processing-API' project directory
-2. Navigate to 'src/public/output' (there should be a file already in there called 'dtsj.jpg')
+2. Navigate to '/public/output' (there should be a file already in there called 'dtsj.jpg')
 3. Your newly added processed image should now be renamed '[YOUR-FILE-NAME]\_[WIDTH]x[HEIGHT].jpeg'
 
 ## Testing
