@@ -16,7 +16,7 @@ export class ResizeHandler {
     inputPath(): string {
         const inputDir = path.join(
             __dirname,
-            '../',
+            '../../',
             'public',
             'input',
             `${this.title}.jpg`
@@ -32,7 +32,7 @@ export class ResizeHandler {
     outputPath(): string {
         return path.join(
             __dirname,
-            '../',
+            '../../',
             'public',
             'output',
             this.outputImageName()

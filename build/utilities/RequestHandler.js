@@ -13,7 +13,7 @@ var ResizeHandler = /** @class */ (function () {
     }
     // Input path for Sharp
     ResizeHandler.prototype.inputPath = function () {
-        var inputDir = path_1.default.join(__dirname, '../', 'public', 'input', "".concat(this.title, ".jpg"));
+        var inputDir = path_1.default.join(__dirname, '../../', 'public', 'input', "".concat(this.title, ".jpg"));
         return inputDir;
     };
     ResizeHandler.prototype.outputImageName = function () {
@@ -21,7 +21,7 @@ var ResizeHandler = /** @class */ (function () {
     };
     // Path to output folder via Sharp's toFile() method
     ResizeHandler.prototype.outputPath = function () {
-        return path_1.default.join(__dirname, '../', 'public', 'output', this.outputImageName());
+        return path_1.default.join(__dirname, '../../', 'public', 'output', this.outputImageName());
     };
     return ResizeHandler;
 }());

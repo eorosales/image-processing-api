@@ -1,5 +1,6 @@
 import express from 'express'
 import sharp from 'sharp'
+import { promises as fs } from 'fs';
 import NodeCache from 'node-cache'
 
 import { ResizeHandler } from '../../utilities/RequestHandler'
@@ -42,7 +43,6 @@ resize.get('/', async (req: express.Request, res: express.Response) => {
 
             // Set key to serve for future requests
             cache.set('key', outputImageName)
-
             // Display processed image to browser
             res.send(`
             
