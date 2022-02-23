@@ -22,6 +22,8 @@ Serve locally at localhost://3000
 npm run start
 ```
 
+---
+
 ## Resizing an image using Sharp
 
 ### Setting up your input image to be resized
@@ -47,10 +49,22 @@ localhost:3000/api/resize?title=[YOUR-FILE-NAME]&width=[YOUR-OUTPUT-FILE-WIDTH]&
 2. Navigate to '/public/output' (there should be a file already in there called 'dtsj.jpg')
 3. Your newly added processed image should now be renamed '[YOUR-FILE-NAME]\_[WIDTH]x[HEIGHT].jpeg'
 
+---
+
 ## Testing
 
 To test, open your CLI and navigate to the Image-Processing-API root directory. Run the following script:
 
 ```
 npm run test
+```
+
+---
+
+## Build
+
+Run the follwing script to build the applcation:
+
+```
+npm run build
 ```
