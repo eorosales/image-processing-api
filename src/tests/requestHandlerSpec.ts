@@ -7,7 +7,7 @@ describe('Test RequestHandler methods', () => {
 
     // Test inputPath() method
     it('Point to correct path for Sharp input JPG file', async () => {
-        const newFile = myImage.inputPath().split('/')[8]
+        const newFile = myImage.inputPath().split('/')[7]
         expect(newFile).toContain(`${myImage.title}.jpg`)
     })
 
@@ -19,7 +19,7 @@ describe('Test RequestHandler methods', () => {
 
     // Test outputPath() method
     it('Output processed images to the "output" folder', () => {
-        const outputFolder = myImage.outputPath().split('/')[7]
+        const outputFolder = myImage.outputPath().split('/')[6]
         expect(outputFolder).toEqual('output')
     })
 })

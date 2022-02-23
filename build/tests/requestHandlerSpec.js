@@ -44,7 +44,7 @@ describe('Test RequestHandler methods', function () {
     it('Point to correct path for Sharp input JPG file', function () { return __awaiter(void 0, void 0, void 0, function () {
         var newFile;
         return __generator(this, function (_a) {
-            newFile = myImage.inputPath().split('/')[8];
+            newFile = myImage.inputPath().split('/')[7];
             expect(newFile).toContain("".concat(myImage.title, ".jpg"));
             return [2 /*return*/];
         });
@@ -60,7 +60,7 @@ describe('Test RequestHandler methods', function () {
     }); });
     // Test outputPath() method
     it('Output processed images to the "output" folder', function () {
-        var outputFolder = myImage.outputPath().split('/')[7];
+        var outputFolder = myImage.outputPath().split('/')[6];
         expect(outputFolder).toEqual('output');
     });
 });
