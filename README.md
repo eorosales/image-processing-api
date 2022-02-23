@@ -49,7 +49,7 @@ localhost:3000/api/resize?title=[YOUR-FILE-NAME]&width=[YOUR-OUTPUT-FILE-WIDTH]&
 
 ## Testing
 
-To test, open your CLI and, navigate to the Image-Processing-API root directory and run the following script:
+To test, open your CLI and navigate to the Image-Processing-API root directory. Run the following script:
 
 ```
 npm run test
