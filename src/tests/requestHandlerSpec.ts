@@ -1,4 +1,4 @@
-import { ResizeHandler } from '../utilities/RequestHandler'
+import { ResizeHandler } from '../utilities/ResizeHandler'
 import path from 'path'
 
 describe('Test RequestHandler methods', () => {

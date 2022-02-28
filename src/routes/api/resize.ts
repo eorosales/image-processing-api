@@ -8,7 +8,7 @@ const cache = new NodeCache()
 
 resize.get(
     '/',
-    async (req: express.Request, res: express.Response): Promise<void> => {
+    async (req: express.Request, res: express.Response) => {
         try {
             // Instantiate RequestHandler with queried args
             const myImage = new ResizeHandler(
@@ -17,13 +17,10 @@ resize.get(
                 parseInt(`${req.query.height}`)
             )
 
-            // Create image name for processed images
-            const outputImageName = myImage.outputImageName()
-
             // Check to see if processed image exists in cache
             // If key is present in cache, retrieve image from cache
             if (cache.has('key')) {
-                res.send(`
+                return res.send(`
                 <h2>Image Processing API</h2>
                 <img src="/output/${cache.get('key')}" />
                 <p>Image being served from cache!</p>
@@ -32,10 +29,10 @@ resize.get(
                 // If key is not present inside cache, process the image
                 // Asynchronously run Sharp to process and output images
                 cache.set('key', myImage.outputImageName())
-                res.send(`
+                return res.send(`
             
             <h2>Image Processing API</h2>
-            <img src="/output/${outputImageName}" />
+            <img src="/output/${myImage.outputImageName()}" />
             <p>Image has been processed and cached!</p>
             
         `)

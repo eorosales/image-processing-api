@@ -4,7 +4,7 @@ import { ResizeHandler } from './ResizeHandler'
 
 export const imageProcessing = (
     req: express.Request,
-    res: express.Response,
+    _res: express.Response,
     next: Function
 ): void => {
     const imageProcess = new ResizeHandler(
@@ -22,5 +22,5 @@ export const imageProcessing = (
         })
         .toFile(imageProcess.outputPath())
 
-    next()
+    next();
 }
