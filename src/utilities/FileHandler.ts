@@ -1,6 +1,6 @@
 import path from 'path'
 
-export class ResizeHandler {
+export class FileHandler {
     // Class properties
     title: string
     width: number

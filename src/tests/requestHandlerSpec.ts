@@ -1,9 +1,9 @@
-import { ResizeHandler } from '../utilities/ResizeHandler'
+import { FileHandler } from '../utilities/FileHandler'
 import path from 'path'
 
 describe('Test RequestHandler methods', () => {
     // Instantiate class and populate with test args
-    const myImage = new ResizeHandler('Title', 100, 200)
+    const myImage = new FileHandler('Title', 100, 200)
 
     // Test inputPath() method
     it('Point to correct path for Sharp input JPG file', async () => {
