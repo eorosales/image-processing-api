@@ -1,7 +1,6 @@
 import { FileHandler } from '../utilities/FileHandler'
-import path from 'path'
 
-describe('Test RequestHandler methods', () => {
+describe('Test FileHandler methods', () => {
     // Instantiate class and populate with test args
     const myImage = new FileHandler('Title', 100, 200)
 

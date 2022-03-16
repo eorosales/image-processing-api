@@ -40,32 +40,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = __importDefault(require("express"));
-var node_cache_1 = __importDefault(require("node-cache"));
-var ResizeHandler_1 = require("../../utilities/ResizeHandler");
+var fs_1 = require("fs");
+var FileHandler_1 = require("../../utilities/FileHandler");
 var resize = express_1.default.Router();
-var cache = new node_cache_1.default();
 resize.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var myImage;
+    var fileHandler, queriedFile, err_1;
     return __generator(this, function (_a) {
-        try {
-            myImage = new ResizeHandler_1.ResizeHandler(req.query.title, parseInt("".concat(req.query.width)), parseInt("".concat(req.query.height)));
-            // Check to see if processed image exists in cache
-            // If key is present in cache, retrieve image from cache
-            if (cache.has('key')) {
-                return [2 /*return*/, res.send("\n                <h2>Image Processing API</h2>\n                <img src=\"/output/".concat(cache.get('key'), "\" />\n                <p>Image being served from cache!</p>\n            "))];
-            }
-            else {
-                // If key is not present inside cache, process the image
-                // Asynchronously run Sharp to process and output images
-                cache.set('key', myImage.outputImageName());
-                return [2 /*return*/, res.send("\n            \n            <h2>Image Processing API</h2>\n            <img src=\"/output/".concat(myImage.outputImageName(), "\" />\n            <p>Image has been processed and cached!</p>\n            \n        "))];
-            }
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                fileHandler = new FileHandler_1.FileHandler(req.query.title, parseInt("".concat(req.query.width)), parseInt("".concat(req.query.height)));
+                return [4 /*yield*/, fs_1.promises.readFile(fileHandler.outputPath(), { encoding: 'base64' })];
+            case 1:
+                queriedFile = _a.sent();
+                res.end(queriedFile, 'base64');
+                return [3 /*break*/, 3];
+            case 2:
+                err_1 = _a.sent();
+                res.send(err_1);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
-        catch (err) {
-            // Handle ERROR
-            res.send("There was an issue with your request: ".concat(err));
-        }
-        return [2 /*return*/];
     });
 }); });
 exports.default = resize;

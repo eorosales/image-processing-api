@@ -36,10 +36,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var ResizeHandler_1 = require("../utilities/ResizeHandler");
+var FileHandler_1 = require("../utilities/FileHandler");
 describe('Test RequestHandler methods', function () {
     // Instantiate class and populate with test args
-    var myImage = new ResizeHandler_1.ResizeHandler('Title', 100, 200);
+    var myImage = new FileHandler_1.FileHandler('Title', 100, 200);
     // Test inputPath() method
     it('Point to correct path for Sharp input JPG file', function () { return __awaiter(void 0, void 0, void 0, function () {
         var newFile;
