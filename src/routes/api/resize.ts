@@ -18,7 +18,7 @@ resize.get(
             const queriedFile = await fs.readFile(fileHandler.outputPath(), {encoding: 'base64'});
             res.end(queriedFile, 'base64');
         } catch(err) {
-            res.send(err);
+            throw new Error(`Unable to find resized file. Details: ${err}`)
         }
     }
 )
