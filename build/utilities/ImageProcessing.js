@@ -74,7 +74,7 @@ var imageProcessing = function (req, _res, next) { return __awaiter(void 0, void
             case 4: return [3 /*break*/, 6];
             case 5:
                 err_1 = _a.sent();
-                throw new Error("".concat(err_1));
+                throw new Error("Invalid or missing title, height or width. Details: ".concat(err_1));
             case 6: return [2 /*return*/];
         }
     });

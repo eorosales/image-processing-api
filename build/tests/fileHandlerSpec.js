@@ -35,18 +35,30 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+var path_1 = __importDefault(require("path"));
+var fs_1 = require("fs");
 var FileHandler_1 = require("../utilities/FileHandler");
+// Run imageProcessing
+// Run tests
+// Delete processed test files
 describe('Test FileHandler methods', function () {
     // Instantiate class and populate with test args
     var myImage = new FileHandler_1.FileHandler('Title', 100, 200);
     // Test inputPath() method
     it('Point to correct path for Sharp input JPG file', function () { return __awaiter(void 0, void 0, void 0, function () {
-        var newFile;
+        var inputDir;
         return __generator(this, function (_a) {
-            newFile = myImage.inputPath().split('/')[7];
-            expect(newFile).toContain("".concat(myImage.title, ".jpg"));
-            return [2 /*return*/];
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, fs_1.promises.readdir(path_1.default.join(__dirname, '../../', 'public/', 'input'))];
+                case 1:
+                    inputDir = _a.sent();
+                    expect(inputDir).toContain('dtsj.jpg');
+                    return [2 /*return*/];
+            }
         });
     }); });
     // Test outputImageName() method
@@ -59,8 +71,16 @@ describe('Test FileHandler methods', function () {
         });
     }); });
     // Test outputPath() method
-    it('Output processed images to the "output" folder', function () {
-        var outputFolder = myImage.outputPath().split('/')[6];
-        expect(outputFolder).toEqual('output');
-    });
+    it('Output processed images to the "output" folder', function () { return __awaiter(void 0, void 0, void 0, function () {
+        var outputDir;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, fs_1.promises.readdir(path_1.default.join(__dirname, '../../', 'public/', 'output'))];
+                case 1:
+                    outputDir = _a.sent();
+                    expect(outputDir).toContain('dtsj_300x300.jpeg');
+                    return [2 /*return*/];
+            }
+        });
+    }); });
 });
