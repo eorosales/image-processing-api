@@ -32,6 +32,7 @@ export const imageProcessing = async (
         next();
         }
     } catch(err) {
-        throw new Error(`Invalid or missing title, height or width. Details: ${err}`);
+        next(err);
+        return;
     }
 }

@@ -35,49 +35,23 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.imageProcessing = void 0;
-var sharp_1 = __importDefault(require("sharp"));
-var path_1 = __importDefault(require("path"));
-var fs_1 = require("fs");
-var FileHandler_1 = require("./FileHandler");
-var imageProcessing = function (req, _res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var fileHandler, cachedFiles, err_1;
+exports.errorHandler = void 0;
+var errorHandler = function (err, req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 5, , 6]);
-                fileHandler = new FileHandler_1.FileHandler(req.query.title, parseInt("".concat(req.query.width)), parseInt("".concat(req.query.height)));
-                return [4 /*yield*/, fs_1.promises.readdir(path_1.default.join(__dirname, '../../', 'public', '/output'))];
-            case 1:
-                cachedFiles = _a.sent();
-                if (!cachedFiles.includes(fileHandler.outputImageName())) return [3 /*break*/, 2];
-                next();
-                return [3 /*break*/, 4];
-            case 2: 
-            // Process images via Sharp
-            return [4 /*yield*/, (0, sharp_1.default)(fileHandler.inputPath())
-                    .resize(fileHandler.width, fileHandler.height)
-                    .jpeg({
-                    quality: 50,
-                    progressive: true,
-                })
-                    .toFile(fileHandler.outputPath())];
-            case 3:
-                // Process images via Sharp
-                _a.sent();
-                next();
-                _a.label = 4;
-            case 4: return [3 /*break*/, 6];
-            case 5:
-                err_1 = _a.sent();
-                next(err_1);
-                return [2 /*return*/];
-            case 6: return [2 /*return*/];
+        if (!req.params.title || req.params.title === undefined) {
+            res.send("Issue with title value in request. ".concat(err));
+            return [2 /*return*/];
         }
+        if (!req.params.width || req.params.width === undefined) {
+            res.send("Check width value in your request. ".concat(err));
+            return [2 /*return*/];
+        }
+        if (!req.params.height || req.params.height === undefined) {
+            res.send("Check height value in your request. ".concat(err));
+            return [2 /*return*/];
+        }
+        return [2 /*return*/];
     });
 }); };
-exports.imageProcessing = imageProcessing;
+exports.errorHandler = errorHandler;

@@ -42,9 +42,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var path_1 = __importDefault(require("path"));
 var fs_1 = require("fs");
 var FileHandler_1 = require("../utilities/FileHandler");
-// Run imageProcessing
-// Run tests
-// Delete processed test files
 describe('Test FileHandler methods', function () {
     // Instantiate class and populate with test args
     var myImage = new FileHandler_1.FileHandler('Title', 100, 200);

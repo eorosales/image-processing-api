@@ -57,7 +57,8 @@ resize.get('/', function (req, res) { return __awaiter(void 0, void 0, void 0, f
                 return [3 /*break*/, 3];
             case 2:
                 err_1 = _a.sent();
-                throw new Error("Unable to find resized file. Details: ".concat(err_1));
+                res.send("Error: Could not find processed image: ".concat(err_1));
+                return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
     });
